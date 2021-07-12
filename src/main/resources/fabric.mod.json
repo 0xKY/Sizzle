@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "sizzle",
+  "version": "${version}",
+  "name": "Sizzle",
+  "description": "Improves Minecraft's farming process and expands on food in Minecraft",
+  "authors": [
+    "KaloyanKYS"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/sizzle/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.kaloyankys.sizzle.client.SizzleClient"
+    ],
+    "main": [
+      "me.kaloyankys.sizzle.Sizzle"
+    ]
+  },
+  "mixins": [
+    "sizzle.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.6",
+    "fabric": "*",
+    "minecraft": "1.17.1"
+  }
+}
