@@ -2,16 +2,15 @@ package me.kaloyankys.sizzle.item;
 
 import net.minecraft.item.Item;
 
-public class SandwhichItem extends Item {
+public class PizzaItem extends Item {
     public boolean meat;
-    public boolean lettuce;
-    public boolean tomato;
-    public boolean cucumber;
+    public boolean mushrooms;
+    public boolean basil;
     public int crunch;
     public int taste;
     public int nourishment;
 
-    public SandwhichItem(Settings settings) {
+    public PizzaItem(Settings settings) {
         super(settings);
     }
 }
