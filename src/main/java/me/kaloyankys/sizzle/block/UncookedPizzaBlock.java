@@ -1,5 +1,6 @@
 package me.kaloyankys.sizzle.block;
 
+import me.kaloyankys.sizzle.init.SItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -38,22 +39,15 @@ public class UncookedPizzaBlock extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         Item item = player.getStackInHand(hand).getItem();
-        if (item == Items.DIAMOND_SWORD && state.get(STEP) == 1) {
-            UNBREAKABLE = true;
+        if (item == SItems.TOMATO_SAUCE_BOTTLE && state.get(STEP) == 1) {
+            player.swingHand(hand);
             world.setBlockState(pos, state.with(STEP, 2));
         }
-        if (item == Items.NETHERITE_SWORD && state.get(STEP) == 2) {
+        if (item == SItems.CHEESE && state.get(STEP) == 2) {
+            player.swingHand(hand);
             world.setBlockState(pos, state.with(STEP, 3));
         }
         return super.onUse(state, world, pos, player, hand, hit);
-    }
-    public static float getBlockHardness() {
-        if (UNBREAKABLE) {
-            return 20.0f;
-        }
-        else {
-            return 0.5f;
-        }
     }
 }
 

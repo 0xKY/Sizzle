@@ -32,16 +32,20 @@ public class ChoppingBoardBlock extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (player.getStackInHand(hand).getItem() == SItems.TOMATO) {
-            player.getStackInHand(hand).decrement(player.getStackInHand(hand).getCount());
-            world.addBlockBreakParticles(pos, state);
-            ItemScatterer.spawn(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), new ItemStack(SItems.SLICED_TOMATO, player.getStackInHand(hand).getCount()));
+        ItemStack itemStack = player.getStackInHand(hand);
+        int itemCount = player.getStackInHand(hand).getCount();
+        if (!world.isClient()) {
+            if (itemStack.getItem() == SItems.TOMATO) {
+                player.swingHand(hand);
+                itemStack.decrement(itemCount);
+                ItemScatterer.spawn(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), new ItemStack(SItems.SLICED_TOMATO, itemCount));
+            } else if (itemStack.getItem() == SItems.CUCUMBER) {
+                player.swingHand(hand);
+                itemStack.decrement(itemCount);
+                ItemScatterer.spawn(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), new ItemStack(SItems.SLICED_CUCUMBER, itemCount));
+            }
         }
-        else if (player.getStackInHand(hand).getItem() == SItems.CUCUMBER) {
-            player.getStackInHand(hand).decrement(player.getStackInHand(hand).getCount());
-            world.addBlockBreakParticles(pos, state);
-            ItemScatterer.spawn(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), new ItemStack(SItems.SLICED_CUCUMBER, player.getStackInHand(hand).getCount()));
-        }
+        super.onUse(state, world, pos, player, hand, hit);
         return ActionResult.CONSUME;
     }
 }

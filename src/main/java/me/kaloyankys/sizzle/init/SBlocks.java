@@ -22,7 +22,7 @@ public class SBlocks {
     public static final Block CHOPPING_BOARD = register("chopping_board", new ChoppingBoardBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB)));
 
     //Pizza
-    public static final Block UNCOOKED_PIZZA = register("uncooked_pizza", new UncookedPizzaBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).hardness(UncookedPizzaBlock.getBlockHardness())));
+    public static final Block UNCOOKED_PIZZA = register("uncooked_pizza", new UncookedPizzaBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).hardness(0.3f)));
     public static final Block OVEN = register("oven", new OvenBlock(FabricBlockSettings.copyOf(Blocks.BRICKS).luminance(state -> state.get(Properties.LIT) ? 13 : 0)));
 
     public static Block register(String id, Block block) {
