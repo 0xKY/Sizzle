@@ -1,0 +1,10 @@
+{
+"variants": {
+"lit=false": {
+"model": "sizzle:block/oven"
+},
+"lit=true": {
+"model": "sizzle:block/oven_lit"
+    }
+  }
+}

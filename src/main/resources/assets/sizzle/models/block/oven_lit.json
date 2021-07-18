@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sizzle:block/pizza_oven_side",
+    "side": "sizzle:block/pizza_oven_lit"
+  }
+}

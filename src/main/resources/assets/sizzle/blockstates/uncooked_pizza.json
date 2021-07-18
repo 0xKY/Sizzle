@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "step=1": {
+      "model": "sizzle:block/uncooked_pizza_dough"
+    },
+    "step=2": {
+      "model": "sizzle:block/uncooked_pizza_sauce"
+    },
+    "step=3": {
+      "model": "sizzle:block/uncooked_pizza_cheese"
+    }
+  }
+}

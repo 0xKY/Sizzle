@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 public class ChoppingBoardBlock extends Block {
 
-    public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
+    public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 17.0D, 2.0D, 17.0D);
 
     public ChoppingBoardBlock(Settings settings) {
         super(settings);
@@ -33,13 +33,15 @@ public class ChoppingBoardBlock extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (player.getStackInHand(hand).getItem() == SItems.TOMATO) {
-            ItemScatterer.spawn(world, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(SItems.SLICED_TOMATO, player.getStackInHand(hand).getCount()));
+            player.getStackInHand(hand).decrement(player.getStackInHand(hand).getCount());
+            world.addBlockBreakParticles(pos, state);
+            ItemScatterer.spawn(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), new ItemStack(SItems.SLICED_TOMATO, player.getStackInHand(hand).getCount()));
         }
         else if (player.getStackInHand(hand).getItem() == SItems.CUCUMBER) {
-            ItemScatterer.spawn(world, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(SItems.SLICED_CUCUMBER, player.getStackInHand(hand).getCount()));
+            player.getStackInHand(hand).decrement(player.getStackInHand(hand).getCount());
+            world.addBlockBreakParticles(pos, state);
+            ItemScatterer.spawn(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), new ItemStack(SItems.SLICED_CUCUMBER, player.getStackInHand(hand).getCount()));
         }
-        player.getStackInHand(hand).decrement(player.getStackInHand(hand).getCount());
-        world.addBlockBreakParticles(pos, state);
         return ActionResult.CONSUME;
     }
 }
