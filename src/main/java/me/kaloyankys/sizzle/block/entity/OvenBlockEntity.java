@@ -30,9 +30,10 @@ import net.minecraft.world.World;
 import java.util.Optional;
 import java.util.Random;
 
+//Class which extends Block Entity - used to create a block entity type
 public class OvenBlockEntity extends BlockEntity implements BlockEntityClientSerializable, Clearable {
-    private static final VoxelShape GRILLING_AREA = Block.createCuboidShape(3.f, .0f, 3.f, 13.f, 1.f, 13.f);
-    private static final int MAX_STACK_SIZE = 6;
+    private static final VoxelShape PIZZA_SPACE = Block.createCuboidShape(3.0f, 0.0f, 3.0f, 13.0f, 1.0f, 13.0f);
+    private static final int MAX_STACK_SIZE = 2;
 
     private final int[] cookingTimes = new int[MAX_STACK_SIZE];
     private final int[] cookingTotalTimes = new int[MAX_STACK_SIZE];
@@ -86,19 +87,19 @@ public class OvenBlockEntity extends BlockEntity implements BlockEntityClientSer
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, OvenBlockEntity blockEntity) {
-        boolean isStoveLit = blockEntity.getCachedState().get(OvenBlock.LIT);
-        boolean isStoveBlocked = blockEntity.isOvenBlockedAbove();
+        boolean isLit = blockEntity.getCachedState().get(OvenBlock.LIT);
+        boolean isBlockedAbove = blockEntity.isOvenBlockedAbove();
 
         if (world != null && world.isClient()) {
-            if (isStoveLit) {
+            if (isLit) {
                 blockEntity.addParticles();
             }
         } else {
-            if (world != null && isStoveBlocked && !blockEntity.inventory.isEmpty()) {
+            if (world != null && isBlockedAbove && !blockEntity.inventory.isEmpty()) {
                 ItemScatterer.spawn(world, pos, blockEntity.inventory);
                 blockEntity.inventoryChanged();
             }
-            if (isStoveLit && !isStoveBlocked) {
+            if (isLit && !isBlockedAbove) {
                 blockEntity.cookAndDrop();
             } else {
                 for (int i = 0; i < blockEntity.inventory.size(); ++i) {
@@ -127,7 +128,7 @@ public class OvenBlockEntity extends BlockEntity implements BlockEntityClientSer
     public boolean isOvenBlockedAbove() {
         if (world != null) {
             BlockState above = world.getBlockState(pos.up());
-            return VoxelShapes.matchesAnywhere(GRILLING_AREA, above.getOutlineShape(world, pos.up()), BooleanBiFunction.AND);
+            return VoxelShapes.matchesAnywhere(PIZZA_SPACE, above.getOutlineShape(world, pos.up()), BooleanBiFunction.AND);
         }
 
         return false;
@@ -148,15 +149,6 @@ public class OvenBlockEntity extends BlockEntity implements BlockEntityClientSer
                 }
             }
         }
-    }
-
-    public Vec2f getOvenItemOffset(int index) {
-        final float X_OFFSET = .3f;
-        final float Y_OFFSET = .2f;
-        final Vec2f[] OFFSETS = {new Vec2f(X_OFFSET, Y_OFFSET), new Vec2f(.0f, Y_OFFSET), new Vec2f(-X_OFFSET, Y_OFFSET), new Vec2f(
-                X_OFFSET, -Y_OFFSET), new Vec2f(.0f, -Y_OFFSET), new Vec2f(-X_OFFSET, -Y_OFFSET),};
-
-        return OFFSETS[index];
     }
 
     private void inventoryChanged() {

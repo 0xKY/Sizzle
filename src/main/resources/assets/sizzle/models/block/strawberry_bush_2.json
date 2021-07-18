@@ -1,0 +1,6 @@
+{
+  "parent": "sizzle:block/strawberry_bush_2",
+  "textures": {
+    "bush": "sizzle:block:block/strawberry_bush_2"
+  }
+}

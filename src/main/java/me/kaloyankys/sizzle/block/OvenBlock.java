@@ -9,10 +9,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.particle.ParticleTypes;
@@ -34,14 +30,18 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.Random;
 
+//Oven Block's class
 public class OvenBlock extends BlockWithEntity {
 
+    //Creates a BooleanProperty called LIT
     public static final BooleanProperty LIT = Properties.LIT;
+
     public OvenBlock(Settings settings) {
         super(settings);
         setDefaultState(getStateManager().getDefaultState().with(LIT, false));
     }
 
+    //Creates the Block Entity
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -103,18 +103,21 @@ public class OvenBlock extends BlockWithEntity {
         super.onBreak(world, pos, state, player);
     }
 
+    //Adds the LIT state to the state manager
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(LIT);
     }
 
+    //Sets the block's LIT state to true when placed
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext context) {
         return getDefaultState().with(LIT, true);
     }
 
+    //Client - Side method that randomly spawns particles
     @Override
     @Environment(value = EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

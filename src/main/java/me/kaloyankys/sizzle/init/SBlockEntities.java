@@ -7,10 +7,12 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
 
 public class SBlockEntities {
+
     public static BlockEntityType<OvenBlockEntity> OVEN_BLOCK_ENTITY = register(
             "oven_block_entity",
             FabricBlockEntityTypeBuilder.create(OvenBlockEntity::new, SBlocks.OVEN).build(null));
 
+    //Method which registers Block entities when used in declaration
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
         return Registry.register(Registry.BLOCK_ENTITY_TYPE, "sizzle", type);
     }
