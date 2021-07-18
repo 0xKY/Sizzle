@@ -4,6 +4,7 @@
   "package": "me.kaloyankys.sizzle.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractCauldronBlockMixin"
   ],
   "client": [
   ],

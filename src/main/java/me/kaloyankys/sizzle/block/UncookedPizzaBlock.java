@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 public class UncookedPizzaBlock extends Block {
 
     public static final IntProperty STEP = IntProperty.of("step", 1, 3);
-    public static boolean UNBREAKABLE = false;
     public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
 
     public UncookedPizzaBlock(Settings settings) {

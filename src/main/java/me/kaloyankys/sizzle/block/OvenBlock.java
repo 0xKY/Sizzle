@@ -116,15 +116,6 @@ public class OvenBlock extends BlockWithEntity {
     }
 
     @Override
-    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        boolean isLit = world.getBlockState(pos).get(LIT);
-        if (isLit && !entity.isFireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
-            entity.damage(DamageSource.HOT_FLOOR, 1.1f);
-        }
-        super.onSteppedOn(world, pos, state, entity);
-    }
-
-    @Override
     @Environment(value = EnvType.CLIENT)
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.get(CampfireBlock.LIT)) {
