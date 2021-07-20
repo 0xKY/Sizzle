@@ -10,7 +10,7 @@ public class SizzleClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(),
-                SBlocks.CHOPPING_BOARD);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
+                SBlocks.CHOPPING_BOARD, SBlocks.STRAWBERRY_BUSH);
     }
 }

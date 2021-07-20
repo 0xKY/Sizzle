@@ -1,9 +1,6 @@
 package me.kaloyankys.sizzle.init;
 
-import me.kaloyankys.sizzle.block.CheeseCauldronBlock;
-import me.kaloyankys.sizzle.block.ChoppingBoardBlock;
-import me.kaloyankys.sizzle.block.OvenBlock;
-import me.kaloyankys.sizzle.block.UncookedPizzaBlock;
+import me.kaloyankys.sizzle.block.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -28,6 +25,9 @@ public class SBlocks {
 
     //Cheese
     public static final Block CHEESE_CAULDRON = registerNoGroup("cheese_cauldron", new CheeseCauldronBlock(AbstractBlock.Settings.copy(Blocks.CAULDRON).ticksRandomly()));
+
+    //Strawberries
+    public static final Block STRAWBERRY_BUSH = register("strawberry_bush", new StrawBerryBushBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH).ticksRandomly()));
 
     public static Block register(String id, Block block) {
         Item blockItem = new BlockItem(block, new Item.Settings().group(ItemGroup.DECORATIONS));
