@@ -1,9 +1,6 @@
 package me.kaloyankys.sizzle;
 
-import me.kaloyankys.sizzle.init.SBlockEntities;
-import me.kaloyankys.sizzle.init.SBlocks;
-import me.kaloyankys.sizzle.init.SFoods;
-import me.kaloyankys.sizzle.init.SItems;
+import me.kaloyankys.sizzle.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
 import net.minecraft.tag.RequiredTagList;
@@ -19,5 +16,7 @@ public class Sizzle implements ModInitializer {
         new SFoods();
         new SBlocks();
         new SBlockEntities();
+        new SWorldGen();
+        new SBiomes();
     }
 }

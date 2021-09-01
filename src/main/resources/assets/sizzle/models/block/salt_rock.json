@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "sizzle:block/salt_rock_top",
+    "side": "sizzle:block/salt_rock_side"
+  }
+}

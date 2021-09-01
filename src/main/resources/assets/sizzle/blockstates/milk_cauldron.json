@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "mature=false,chocolate=false": {
+      "model": "sizzle:block/milk_cauldron"
+    },
+    "mature=true,chocolate=false": {
+      "model": "sizzle:block/milk_cauldron_mature"
+    },
+    "chocolate=false,mature=false": {
+      "model": "sizzle:block/milk_cauldron"
+    },
+    "chocolate=true,mature=false": {
+      "model": "sizzle:block/milk_cauldron_chocolate"
+    }
+  }
+}

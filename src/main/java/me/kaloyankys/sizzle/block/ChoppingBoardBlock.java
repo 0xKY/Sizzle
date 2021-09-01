@@ -1,13 +1,12 @@
 package me.kaloyankys.sizzle.block;
 
+import me.kaloyankys.sizzle.init.SBlockEntities;
 import me.kaloyankys.sizzle.init.SItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.ItemEntity;
+import me.kaloyankys.sizzle.init.STags;
+import me.kaloyankys.sizzle.item.SFood;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -20,8 +19,7 @@ import net.minecraft.world.World;
 public class ChoppingBoardBlock extends Block {
 
     public static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 17.0D, 2.0D, 17.0D);
-
-    public ChoppingBoardBlock(Settings settings) {
+    public ChoppingBoardBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
@@ -33,16 +31,14 @@ public class ChoppingBoardBlock extends Block {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getStackInHand(hand);
+        SFood slices = (SFood) itemStack.getItem();
         int itemCount = player.getStackInHand(hand).getCount();
-        if (!world.isClient()) {
-            if (itemStack.getItem() == SItems.TOMATO) {
-                player.swingHand(hand);
-                itemStack.decrement(itemCount);
-                ItemScatterer.spawn(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), new ItemStack(SItems.SLICED_TOMATO, itemCount));
-            } else if (itemStack.getItem() == SItems.CUCUMBER) {
-                player.swingHand(hand);
-                itemStack.decrement(itemCount);
-                ItemScatterer.spawn(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), new ItemStack(SItems.SLICED_CUCUMBER, itemCount));
+        if (!world.isClient() && slices.getDefaultStack().isIn(STags.CHOPPABLE)) {
+            player.swingHand(hand);
+            itemStack.decrement(itemCount);
+            while (itemCount > 0) {
+                itemCount--;
+                ItemScatterer.spawn(world, pos.getX() + 1.0D, pos.getY() + 1.0D, pos.getZ() + 1.0D, slices.choppedItem.getDefaultStack());
             }
         }
         super.onUse(state, world, pos, player, hand, hit);

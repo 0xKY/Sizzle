@@ -10,6 +10,7 @@ import java.util.function.Function;
 
 public class STags {
     public static final Tag<Item> OVEN_COOKABLES = register("oven_cookables", TagRegistry::item);
+    public static final Tag<Item> CHOPPABLE = register("choppable", TagRegistry::item);
 
     private static <E>Tag<E> register(String path, Function<Identifier, Tag<E>> tags) {
         return tags.apply(new Identifier("sizzle", path));
